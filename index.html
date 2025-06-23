@@ -1,0 +1,1963 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Экономика 8 класс | Интерактивная викторина</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a2980, #26d0ce);
+            color: #333;
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1400px;
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.4);
+            overflow: hidden;
+            position: relative;
+        }
+        
+        header {
+            background: linear-gradient(90deg, #2c3e50, #4a6491);
+            color: white;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 4px solid #3498db;
+            position: relative;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .logo i {
+            font-size: 2.5rem;
+            color: #3498db;
+        }
+        
+        .logo h1 {
+            font-size: 1.8rem;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .top-controls {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+        
+        .timer-controls {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 10px 20px;
+            border-radius: 50px;
+        }
+        
+        #timer-display {
+            font-size: 1.8rem;
+            font-weight: bold;
+            min-width: 120px;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 5px 15px;
+            border-radius: 30px;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .timer-btn {
+            background: #3498db;
+            border: none;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .timer-btn:hover {
+            background: #2980b9;
+            transform: scale(1.1);
+        }
+        
+        .teacher-btn {
+            background: #9b59b6;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .teacher-btn:hover {
+            background: #8e44ad;
+            transform: translateY(-2px);
+        }
+        
+        .main-content {
+            display: flex;
+            min-height: 700px;
+        }
+        
+        .topics-panel {
+            flex: 1;
+            background: #f8f9fa;
+            padding: 25px;
+            border-right: 1px solid #e0e0e0;
+            overflow-y: auto;
+        }
+        
+        .topics-panel h2 {
+            margin-bottom: 20px;
+            color: #2c3e50;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #3498db;
+        }
+        
+        .topic-item {
+            background: white;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+            cursor: pointer;
+            transition: all 0.3s;
+            border-left: 4px solid #3498db;
+        }
+        
+        .topic-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .topic-item.active {
+            border-left: 4px solid #e74c3c;
+            background: #fffaf0;
+        }
+        
+        .topic-title {
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin-bottom: 8px;
+            color: #2c3e50;
+        }
+        
+        .topic-stats {
+            display: flex;
+            justify-content: space-between;
+            color: #7f8c8d;
+            font-size: 0.9rem;
+        }
+        
+        .quiz-area {
+            flex: 3;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .question-grid {
+            flex: 1;
+            padding: 30px;
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 15px;
+            border-bottom: 1px solid #eee;
+            background: #f0f7ff;
+        }
+        
+        .question-card {
+            background: linear-gradient(135deg, #3498db, #2c3e50);
+            color: white;
+            height: 90px;
+            border-radius: 12px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .question-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .question-card.answered {
+            opacity: 0.5;
+            cursor: default;
+        }
+        
+        .question-card.easy {
+            background: linear-gradient(135deg, #27ae60, #2ecc71);
+        }
+        
+        .question-card.medium {
+            background: linear-gradient(135deg, #f39c12, #f1c40f);
+        }
+        
+        .question-card.hard {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+        }
+        
+        .points-badge {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            background: rgba(0, 0, 0, 0.3);
+            font-size: 0.8rem;
+            padding: 2px 8px;
+            border-radius: 12px;
+        }
+        
+        .question-display {
+            flex: 2;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            position: relative;
+            overflow-y: auto;
+        }
+        
+        .question-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #3498db;
+        }
+        
+        .question-points {
+            background: #3498db;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+        }
+        
+        .question-text {
+            font-size: 1.4rem;
+            line-height: 1.5;
+            padding: 15px 0;
+            color: #2c3e50;
+        }
+        
+        .options-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 10px;
+        }
+        
+        .option {
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            padding: 15px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 1.1rem;
+            color: #34495e;
+        }
+        
+        .option:hover {
+            background: #e9ecef;
+            transform: translateX(5px);
+        }
+        
+        .option.selected {
+            border-color: #3498db;
+            background: #d6eaf8;
+        }
+        
+        .option.correct {
+            border-color: #27ae60;
+            background: #d5f5e3;
+        }
+        
+        .option.incorrect {
+            border-color: #e74c3c;
+            background: #fadbd8;
+        }
+        
+        .explanation {
+            background: #fffde7;
+            padding: 15px;
+            border-radius: 10px;
+            border-left: 4px solid #f1c40f;
+            margin-top: 15px;
+            color: #7d6608;
+            display: none;
+        }
+        
+        .controls {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        
+        .btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+        }
+        
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        .btn-primary {
+            background: #3498db;
+            color: white;
+        }
+        
+        .btn-primary:hover:not(:disabled) {
+            background: #2980b9;
+            transform: translateY(-2px);
+        }
+        
+        .btn-secondary {
+            background: #95a5a6;
+            color: white;
+        }
+        
+        .btn-secondary:hover:not(:disabled) {
+            background: #7f8c8d;
+            transform: translateY(-2px);
+        }
+        
+        .btn-success {
+            background: #27ae60;
+            color: white;
+        }
+        
+        .btn-success:hover:not(:disabled) {
+            background: #219653;
+            transform: translateY(-2px);
+        }
+        
+        .btn-danger {
+            background: #e74c3c;
+            color: white;
+        }
+        
+        .btn-danger:hover:not(:disabled) {
+            background: #c0392b;
+            transform: translateY(-2px);
+        }
+        
+        .score-panel {
+            background: #2c3e50;
+            color: white;
+            padding: 15px 20px;
+            border-radius: 15px;
+            margin-top: 20px;
+            text-align: center;
+            font-size: 1.3rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+        
+        #score {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #f1c40f;
+        }
+        
+        .admin-panel {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 20px;
+            margin-top: 20px;
+            border: 2px dashed #3498db;
+            display: none;
+        }
+        
+        .admin-panel h3 {
+            margin-bottom: 15px;
+            color: #2c3e50;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        
+        input, select, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border 0.3s;
+        }
+        
+        input:focus, select:focus, textarea:focus {
+            border-color: #3498db;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.3);
+        }
+        
+        textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+        
+        .option-inputs {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin: 15px 0;
+        }
+        
+        .option-input {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .option-input input {
+            flex: 1;
+        }
+        
+        .option-input .correct-option {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #eee;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .option-input .correct-option.active {
+            background: #27ae60;
+            color: white;
+        }
+        
+        .password-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            display: none;
+        }
+        
+        .password-box {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 400px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        
+        .password-box h3 {
+            margin-bottom: 20px;
+            color: #2c3e50;
+        }
+        
+        .password-box input {
+            margin: 15px 0;
+            padding: 12px;
+            width: 100%;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 1.1rem;
+        }
+        
+        .password-box button {
+            width: 100%;
+            padding: 12px;
+            background: #3498db;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .password-box button:hover {
+            background: #2980b9;
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 20px;
+            color: white;
+            background: rgba(0, 0, 0, 0.2);
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 1200px) {
+            .question-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+        
+        @media (max-width: 900px) {
+            .main-content {
+                flex-direction: column;
+            }
+            
+            .topics-panel {
+                border-right: none;
+                border-bottom: 1px solid #e0e0e0;
+            }
+            
+            .question-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        
+        @media (max-width: 600px) {
+            .question-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            header {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+            
+            .top-controls {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <i class="fas fa-chart-line"></i>
+                <h1>ЭКОНОМИКА 8 КЛАСС | ИНТЕРАКТИВНАЯ ВИКТОРИНА</h1>
+            </div>
+            <div class="top-controls">
+                <div class="timer-controls">
+                    <button class="timer-btn" id="set-timer-btn" title="Установить таймер">
+                        <i class="fas fa-cog"></i>
+                    </button>
+                    <div id="timer-display">45:00</div>
+                    <button class="timer-btn" id="start-timer-btn" title="Старт">
+                        <i class="fas fa-play"></i>
+                    </button>
+                    <button class="timer-btn" id="pause-timer-btn" title="Пауза">
+                        <i class="fas fa-pause"></i>
+                    </button>
+                </div>
+                <button class="teacher-btn" id="teacher-mode-btn">
+                    <i class="fas fa-user-shield"></i> Режим учителя
+                </button>
+            </div>
+        </header>
+        
+        <div class="main-content">
+            <div class="topics-panel">
+                <h2><i class="fas fa-book"></i> Темы курса</h2>
+                <div class="topic-item active" data-topic="all">
+                    <div class="topic-title">Все темы</div>
+                    <div class="topic-stats">50 вопросов</div>
+                </div>
+                <div class="topic-item" data-topic="basics">
+                    <div class="topic-title">Основы экономики</div>
+                    <div class="topic-stats">10 вопросов</div>
+                </div>
+                <div class="topic-item" data-topic="market">
+                    <div class="topic-title">Рыночная экономика</div>
+                    <div class="topic-stats">8 вопросов</div>
+                </div>
+                <div class="topic-item" data-topic="money">
+                    <div class="topic-title">Деньги и банки</div>
+                    <div class="topic-stats">7 вопросов</div>
+                </div>
+                <div class="topic-item" data-topic="state">
+                    <div class="topic-title">Государство и экономика</div>
+                    <div class="topic-stats">9 вопросов</div>
+                </div>
+                <div class="topic-item" data-topic="world">
+                    <div class="topic-title">Мировая экономика</div>
+                    <div class="topic-stats">6 вопросов</div>
+                </div>
+                <div class="topic-item" data-topic="business">
+                    <div class="topic-title">Предпринимательство</div>
+                    <div class="topic-stats">5 вопросов</div>
+                </div>
+                <div class="topic-item" data-topic="taxes">
+                    <div class="topic-title">Налоги</div>
+                    <div class="topic-stats">5 вопросов</div>
+                </div>
+            </div>
+            
+            <div class="quiz-area">
+                <div class="question-grid" id="question-grid">
+                    <!-- Вопросы будут генерироваться через JS -->
+                </div>
+                
+                <div class="question-display" id="question-display">
+                    <div class="question-header">
+                        <h2>Выберите вопрос</h2>
+                        <div class="question-points" id="question-points">0 баллов</div>
+                    </div>
+                    
+                    <div class="question-text" id="question-text">
+                        Выберите вопрос из сетки выше. Цвета карточек соответствуют сложности вопросов:
+                        <ul style="margin-top: 15px; padding-left: 20px;">
+                            <li><span style="color: #27ae60; font-weight: bold;">Зеленый</span> - легкий (10 баллов)</li>
+                            <li><span style="color: #f39c12; font-weight: bold;">Желтый</span> - средний (20 баллов)</li>
+                            <li><span style="color: #e74c3c; font-weight: bold;">Красный</span> - сложный (50 баллов)</li>
+                        </ul>
+                        <p style="margin-top: 15px;">Начните с любого вопроса и зарабатывайте баллы!</p>
+                    </div>
+                    
+                    <div class="options-container" id="options-container">
+                        <!-- Варианты ответов будут загружены при выборе вопроса -->
+                    </div>
+                    
+                    <div class="explanation" id="explanation">
+                        <!-- Пояснение будет загружено после ответа -->
+                    </div>
+                    
+                    <div class="controls">
+                        <button class="btn btn-secondary" id="prev-btn" disabled>
+                            <i class="fas fa-arrow-left"></i> Назад
+                        </button>
+                        <button class="btn btn-primary" id="submit-btn" disabled>
+                            <i class="fas fa-paper-plane"></i> Ответить
+                        </button>
+                        <button class="btn btn-secondary" id="next-btn" disabled>
+                            Далее <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                    
+                    <div class="score-panel">
+                        Ваш счет: <span id="score">0</span> баллов
+                    </div>
+                    
+                    <div class="admin-panel" id="admin-panel">
+                        <h3><i class="fas fa-user-shield"></i> Режим учителя</h3>
+                        <div class="form-group">
+                            <label for="question-input">Вопрос:</label>
+                            <textarea id="question-input" placeholder="Введите текст вопроса"></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Варианты ответов:</label>
+                            <div class="option-inputs" id="option-inputs">
+                                <div class="option-input">
+                                    <input type="text" placeholder="Вариант 1">
+                                    <div class="correct-option active" data-index="0"><i class="fas fa-check"></i></div>
+                                </div>
+                                <div class="option-input">
+                                    <input type="text" placeholder="Вариант 2">
+                                    <div class="correct-option" data-index="1"><i class="fas fa-check"></i></div>
+                                </div>
+                            </div>
+                            <button class="btn btn-secondary" id="add-option-btn">
+                                <i class="fas fa-plus"></i> Добавить вариант
+                            </button>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="explanation-input">Пояснение:</label>
+                            <textarea id="explanation-input" placeholder="Пояснение к вопросу"></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="difficulty-select">Сложность:</label>
+                            <select id="difficulty-select">
+                                <option value="10">Легкий (10 баллов)</option>
+                                <option value="20">Средний (20 баллов)</option>
+                                <option value="50">Сложный (50 баллов)</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="topic-select">Тема:</label>
+                            <select id="topic-select">
+                                <option value="basics">Основы экономики</option>
+                                <option value="market">Рыночная экономика</option>
+                                <option value="money">Деньги и банки</option>
+                                <option value="state">Государство и экономика</option>
+                                <option value="world">Мировая экономика</option>
+                                <option value="business">Предпринимательство</option>
+                                <option value="taxes">Налоги</option>
+                            </select>
+                        </div>
+                        
+                        <div class="controls">
+                            <button class="btn btn-success" id="add-question-btn">
+                                <i class="fas fa-plus-circle"></i> Добавить вопрос
+                            </button>
+                            <button class="btn btn-danger" id="reset-questions-btn">
+                                <i class="fas fa-trash-alt"></i> Сбросить вопросы
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            Викторина по экономике для 8 класса | Разработано для российских школ | © 2023
+        </div>
+        
+        <div class="password-modal" id="password-modal">
+            <div class="password-box">
+                <h3><i class="fas fa-lock"></i> Доступ к режиму учителя</h3>
+                <p>Введите пароль для доступа к панели учителя</p>
+                <input type="password" id="password-input" placeholder="Введите пароль">
+                <button id="password-submit">Войти</button>
+                <p id="password-error" style="color: #e74c3c; margin-top: 15px; display: none;">Неверный пароль! Попробуйте снова.</p>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Обширная база вопросов по экономике для 8 класса
+        let questions = [
+            // Основы экономики (10 вопросов)
+            {
+                id: 1,
+                question: "Что из перечисленного относится к факторам производства?",
+                options: [
+                    "Труд, земля, капитал, предпринимательство",
+                    "Спрос, предложение, конкуренция",
+                    "Деньги, акции, облигации",
+                    "Экспорт, импорт, таможенные пошлины"
+                ],
+                correctIndex: 0,
+                explanation: "Факторы производства - ресурсы, необходимые для производства товаров и услуг. Основные: труд (рабочая сила), земля (природные ресурсы), капитал (производственные средства) и предпринимательские способности.",
+                points: 10,
+                difficulty: "easy",
+                topic: "basics"
+            },
+            {
+                id: 2,
+                question: "Что такое экономика как наука?",
+                options: [
+                    "Наука о ведении домашнего хозяйства",
+                    "Наука о производстве, распределении и потреблении товаров и услуг",
+                    "Наука о деньгах и банках",
+                    "Наука о международной торговле"
+                ],
+                correctIndex: 1,
+                explanation: "Экономика - это общественная наука, изучающая процессы производства, распределения, обмена и потребления товаров и услуг в условиях ограниченных ресурсов.",
+                points: 10,
+                difficulty: "easy",
+                topic: "basics"
+            },
+            {
+                id: 3,
+                question: "Что означает термин 'альтернативная стоимость'?",
+                options: [
+                    "Стоимость альтернативных источников энергии",
+                    "Стоимость упущенной возможности",
+                    "Стоимость импортных товаров",
+                    "Стоимость производства товара"
+                ],
+                correctIndex: 1,
+                explanation: "Альтернативная стоимость - это стоимость наилучшего альтернативного варианта, от которого пришлось отказаться при выборе данного варианта действий.",
+                points: 20,
+                difficulty: "medium",
+                topic: "basics"
+            },
+            {
+                id: 4,
+                question: "Что такое экономические потребности?",
+                options: [
+                    "Потребности в пище, одежде, жилье",
+                    "Все потребности человека, которые можно удовлетворить с помощью экономических благ",
+                    "Потребности в образовании и медицинских услугах",
+                    "Потребности в отдыхе и развлечениях"
+                ],
+                correctIndex: 1,
+                explanation: "Экономические потребности - это потребности, для удовлетворения которых необходимы экономические блага (товары и услуги), создаваемые в процессе производства.",
+                points: 10,
+                difficulty: "easy",
+                topic: "basics"
+            },
+            {
+                id: 5,
+                question: "Что из перечисленного является примером экономического блага?",
+                options: [
+                    "Воздух",
+                    "Солнечный свет",
+                    "Хлеб",
+                    "Дождевая вода"
+                ],
+                correctIndex: 2,
+                explanation: "Экономические блага - это товары и услуги, которые являются результатом экономической деятельности и доступны в ограниченном количестве (в отличие от свободных благ).",
+                points: 10,
+                difficulty: "easy",
+                topic: "basics"
+            },
+            {
+                id: 6,
+                question: "Что такое экономический выбор?",
+                options: [
+                    "Выбор товаров в магазине",
+                    "Решение о том, как использовать ограниченные ресурсы",
+                    "Выбор профессии",
+                    "Выбор банка для кредита"
+                ],
+                correctIndex: 1,
+                explanation: "Экономический выбор - это решение, которое принимается в условиях ограниченности ресурсов и необходимости удовлетворения неограниченных потребностей.",
+                points: 20,
+                difficulty: "medium",
+                topic: "basics"
+            },
+            {
+                id: 7,
+                question: "Что такое экономическая система?",
+                options: [
+                    "Способ организации экономической жизни общества",
+                    "Система банков и финансовых организаций",
+                    "Система налогообложения",
+                    "Система международной торговли"
+                ],
+                correctIndex: 0,
+                explanation: "Экономическая система - это способ организации хозяйственной жизни общества, определяющий ответы на основные экономические вопросы: что, как и для кого производить.",
+                points: 20,
+                difficulty: "medium",
+                topic: "basics"
+            },
+            {
+                id: 8,
+                question: "Какая экономическая система основана на традициях и обычаях?",
+                options: [
+                    "Рыночная экономика",
+                    "Командная экономика",
+                    "Традиционная экономика",
+                    "Смешанная экономика"
+                ],
+                correctIndex: 2,
+                explanation: "Традиционная экономика основана на обычаях, традициях и исторически сложившихся способах ведения хозяйства.",
+                points: 10,
+                difficulty: "easy",
+                topic: "basics"
+            },
+            {
+                id: 9,
+                question: "Что характерно для командной экономической системы?",
+                options: [
+                    "Частная собственность на средства производства",
+                    "Централизованное планирование",
+                    "Свободное ценообразование",
+                    "Конкуренция производителей"
+                ],
+                correctIndex: 1,
+                explanation: "В командной экономике все основные экономические решения принимаются государством, которое осуществляет централизованное планирование.",
+                points: 20,
+                difficulty: "medium",
+                topic: "basics"
+            },
+            {
+                id: 10,
+                question: "Какой вид экономической системы преобладает в России?",
+                options: [
+                    "Традиционная экономика",
+                    "Командная экономика",
+                    "Рыночная экономика",
+                    "Смешанная экономика"
+                ],
+                correctIndex: 3,
+                explanation: "Россия имеет смешанную экономическую систему, где сочетаются рыночные механизмы с государственным регулированием в ключевых сферах.",
+                points: 10,
+                difficulty: "easy",
+                topic: "basics"
+            },
+            
+            // Рыночная экономика (8 вопросов)
+            {
+                id: 11,
+                question: "Что показывает кривая спроса?",
+                options: [
+                    "Зависимость спроса от предложения",
+                    "Зависимость количества товара от его цены",
+                    "Изменение издержек производства",
+                    "Динамику экономического роста"
+                ],
+                correctIndex: 1,
+                explanation: "Кривая спроса иллюстрирует обратную зависимость между ценой товара и количеством, которое покупатели готовы приобрести (при прочих равных условиях).",
+                points: 20,
+                difficulty: "medium",
+                topic: "market"
+            },
+            {
+                id: 12,
+                question: "Что такое конкуренция?",
+                options: [
+                    "Сотрудничество между предприятиями",
+                    "Соперничество между участниками рынка за лучшие условия",
+                    "Государственное регулирование цен",
+                    "Объединение предприятий в холдинг"
+                ],
+                correctIndex: 1,
+                explanation: "Конкуренция - это соперничество между участниками рыночного хозяйства за лучшие условия производства и купли-продажи товаров.",
+                points: 10,
+                difficulty: "easy",
+                topic: "market"
+            },
+            {
+                id: 13,
+                question: "Что из перечисленного является признаком совершенной конкуренции?",
+                options: [
+                    "Множество покупателей и продавцов",
+                    "Один продавец на рынке",
+                    "Несколько крупных продавцов",
+                    "Государственный контроль над ценами"
+                ],
+                correctIndex: 0,
+                explanation: "Совершенная конкуренция характеризуется большим количеством покупателей и продавцов, однородностью продукции и свободным входом на рынок.",
+                points: 20,
+                difficulty: "medium",
+                topic: "market"
+            },
+            {
+                id: 14,
+                question: "Что такое монополия?",
+                options: [
+                    "Рынок с одним покупателем",
+                    "Рынок с одним продавцом",
+                    "Рынок с двумя продавцами",
+                    "Рынок с множеством продавцов"
+                ],
+                correctIndex: 1,
+                explanation: "Монополия - это тип рыночной структуры, при которой на рынке присутствует только один продавец определенного товара или услуги.",
+                points: 10,
+                difficulty: "easy",
+                topic: "market"
+            },
+            {
+                id: 15,
+                question: "Что из перечисленного является примером естественной монополии?",
+                options: [
+                    "Сеть ресторанов быстрого питания",
+                    "Производство автомобилей",
+                    "Железнодорожные перевозки",
+                    "Выпуск мобильных телефонов"
+                ],
+                correctIndex: 2,
+                explanation: "Естественная монополия возникает в отраслях, где эффективнее иметь одного производителя (например, железные дороги, системы водоснабжения).",
+                points: 50,
+                difficulty: "hard",
+                topic: "market"
+            },
+            {
+                id: 16,
+                question: "Что такое предложение в экономике?",
+                options: [
+                    "Желание потребителей купить товар",
+                    "Количество товара, которое производители готовы продать по определенной цене",
+                    "Спрос на товары и услуги",
+                    "Цена товара на рынке"
+                ],
+                correctIndex: 1,
+                explanation: "Предложение - это количество товара или услуги, которое производители готовы предложить к продаже по определенной цене в течение определенного периода времени.",
+                points: 20,
+                difficulty: "medium",
+                topic: "market"
+            },
+            {
+                id: 17,
+                question: "Что происходит на рынке при установлении равновесной цены?",
+                options: [
+                    "Возникает дефицит товара",
+                    "Возникает избыток товара",
+                    "Спрос равен предложению",
+                    "Цена начинает резко колебаться"
+                ],
+                correctIndex: 2,
+                explanation: "Равновесная цена - это цена, при которой объем спроса равен объему предложения. На рынке достигается равновесие, нет ни дефицита, ни излишков товара.",
+                points: 50,
+                difficulty: "hard",
+                topic: "market"
+            },
+            {
+                id: 18,
+                question: "Что такое эластичность спроса?",
+                options: [
+                    "Способность товара растягиваться",
+                    "Чувствительность спроса к изменению цены",
+                    "Скорость изменения спроса",
+                    "Изменение спроса под влиянием моды"
+                ],
+                correctIndex: 1,
+                explanation: "Эластичность спроса - это степень чувствительности спроса к изменению цены товара или других факторов.",
+                points: 50,
+                difficulty: "hard",
+                topic: "market"
+            },
+            
+            // Деньги и банки (7 вопросов)
+            {
+                id: 19,
+                question: "Какая функция денег является основной?",
+                options: [
+                    "Средство накопления",
+                    "Средство платежа",
+                    "Мера стоимости",
+                    "Мировые деньги"
+                ],
+                correctIndex: 2,
+                explanation: "Основная функция денег - быть мерой стоимости, то есть служить для измерения и соизмерения стоимости различных товаров и услуг.",
+                points: 20,
+                difficulty: "medium",
+                topic: "money"
+            },
+            {
+                id: 20,
+                question: "Что из перечисленного относится к функциям Центрального банка?",
+                options: [
+                    "Выдача кредитов населению",
+                    "Эмиссия денег",
+                    "Открытие вкладов для юридических лиц",
+                    "Страхование вкладов"
+                ],
+                correctIndex: 1,
+                explanation: "Ключевая функция Центробанка (в России - Банк России) - эмиссия (выпуск) денег и организация денежного обращения. Он также регулирует коммерческие банки.",
+                points: 20,
+                difficulty: "medium",
+                topic: "money"
+            },
+            {
+                id: 21,
+                question: "Что такое инфляция?",
+                options: [
+                    "Рост стоимости акций компаний",
+                    "Увеличение золотовалютных резервов",
+                    "Устойчивое повышение общего уровня цен",
+                    "Снижение покупательной способности денег"
+                ],
+                correctIndex: 2,
+                explanation: "Инфляция - устойчивое повышение общего уровня цен на товары и услуги в экономике. Важно: это не рост цен на отдельные товары, а общий рост цен.",
+                points: 20,
+                difficulty: "medium",
+                topic: "money"
+            },
+            {
+                id: 22,
+                question: "Что такое банковский вклад?",
+                options: [
+                    "Деньги, взятые в долг у банка",
+                    "Деньги, переданные банку на хранение под проценты",
+                    "Платеж за обслуживание счета",
+                    "Страхование банковских операций"
+                ],
+                correctIndex: 1,
+                explanation: "Банковский вклад (депозит) - это денежные средства, размещенные в банке для хранения и получения дохода в виде процентов.",
+                points: 10,
+                difficulty: "easy",
+                topic: "money"
+            },
+            {
+                id: 23,
+                question: "Что такое кредит?",
+                options: [
+                    "Денежная сумма, хранящаяся в банке",
+                    "Денежная сумма, предоставляемая в долг под проценты",
+                    "Беспроцентная ссуда",
+                    "Плата за банковские услуги"
+                ],
+                correctIndex: 1,
+                explanation: "Кредит - это предоставление денег или товаров в долг на условиях возвратности, срочности и платности (обычно с выплатой процентов).",
+                points: 10,
+                difficulty: "easy",
+                topic: "money"
+            },
+            {
+                id: 24,
+                question: "Что такое ставка рефинансирования?",
+                options: [
+                    "Процент по вкладам в банках",
+                    "Ставка, по которой ЦБ выдает кредиты коммерческим банкам",
+                    "Ставка по ипотечным кредитам",
+                    "Ставка по потребительским кредитам"
+                ],
+                correctIndex: 1,
+                explanation: "Ставка рефинансирования - это процентная ставка, по которой центральный банк предоставляет кредиты коммерческим банкам.",
+                points: 50,
+                difficulty: "hard",
+                topic: "money"
+            },
+            {
+                id: 25,
+                question: "Что из перечисленного не является функцией денег?",
+                options: [
+                    "Средство обращения",
+                    "Средство накопления",
+                    "Средство производства",
+                    "Мера стоимости"
+                ],
+                correctIndex: 2,
+                explanation: "Основные функции денег: мера стоимости, средство обращения, средство накопления, средство платежа, мировые деньги. Средство производства - это фактор производства, а не функция денег.",
+                points: 50,
+                difficulty: "hard",
+                topic: "money"
+            },
+            
+            // Государство и экономика (9 вопросов)
+            {
+                id: 26,
+                question: "Что такое бюджет?",
+                options: [
+                    "Список доходов и расходов за определенный период",
+                    "Сбережения семьи",
+                    "Кредит, взятый государством",
+                    "Налоговая декларация"
+                ],
+                correctIndex: 0,
+                explanation: "Бюджет - это смета (роспись) доходов и расходов субъекта (государства, предприятия, семьи) на определенный период времени.",
+                points: 10,
+                difficulty: "easy",
+                topic: "state"
+            },
+            {
+                id: 27,
+                question: "Что такое бюджетный дефицит?",
+                options: [
+                    "Превышение доходов бюджета над расходами",
+                    "Превышение расходов бюджета над доходами",
+                    "Сбалансированность доходов и расходов бюджета",
+                    "Общая сумма государственного долга"
+                ],
+                correctIndex: 1,
+                explanation: "Бюджетный дефицит - это превышение расходов государственного бюджета над его доходами.",
+                points: 20,
+                difficulty: "medium",
+                topic: "state"
+            },
+            {
+                id: 28,
+                question: "Что из перечисленного является источником доходов государственного бюджета?",
+                options: [
+                    "Выплата пенсий",
+                    "Финансирование образования",
+                    "Налоги",
+                    "Субсидии предприятиям"
+                ],
+                correctIndex: 2,
+                explanation: "Основные источники доходов государственного бюджета: налоги, государственные займы, доходы от государственной собственности, эмиссия денег.",
+                points: 10,
+                difficulty: "easy",
+                topic: "state"
+            },
+            {
+                id: 29,
+                question: "Что такое государственный долг?",
+                options: [
+                    "Долг граждан перед государством",
+                    "Долг государства перед иностранными кредиторами",
+                    "Сумма задолженности государства по выпущенным и непогашенным займам",
+                    "Долг предприятий государству"
+                ],
+                correctIndex: 2,
+                explanation: "Государственный долг - это сумма задолженности государства по выпущенным и непогашенным государственным займам, включая начисленные по ним проценты.",
+                points: 20,
+                difficulty: "medium",
+                topic: "state"
+            },
+            {
+                id: 30,
+                question: "Что из перечисленного является функцией государства в экономике?",
+                options: [
+                    "Производство всех товаров и услуг",
+                    "Перераспределение доходов",
+                    "Установление цен на все товары",
+                    "Непосредственное управление предприятиями"
+                ],
+                correctIndex: 1,
+                explanation: "Основные функции государства в экономике: обеспечение правовой базы, перераспределение доходов, стабилизация экономики, производство общественных благ.",
+                points: 20,
+                difficulty: "medium",
+                topic: "state"
+            },
+            {
+                id: 31,
+                question: "Что такое общественные блага?",
+                options: [
+                    "Товары, которые производятся государством",
+                    "Блага, доступные всем и неисчерпаемые",
+                    "Блага, потребление которых одним лицом не уменьшает их доступность для других",
+                    "Товары, распределяемые по карточкам"
+                ],
+                correctIndex: 2,
+                explanation: "Общественные блага - это товары и услуги, которые характеризуются неконкурентностью и неисключаемостью в потреблении (например, национальная оборона, уличное освещение).",
+                points: 50,
+                difficulty: "hard",
+                topic: "state"
+            },
+            {
+                id: 32,
+                question: "Что такое фискальная политика?",
+                options: [
+                    "Политика регулирования денежной массы",
+                    "Политика регулирования государственных расходов и налогов",
+                    "Политика регулирования валютного курса",
+                    "Политика регулирования внешней торговли"
+                ],
+                correctIndex: 1,
+                explanation: "Фискальная (бюджетно-налоговая) политика - это политика государства в области налогообложения и государственных расходов, направленная на стабилизацию экономики.",
+                points: 50,
+                difficulty: "hard",
+                topic: "state"
+            },
+            {
+                id: 33,
+                question: "Что такое ВВП (валовой внутренний продукт)?",
+                options: [
+                    "Общая стоимость всех акций на фондовом рынке страны",
+                    "Сумма всех доходов граждан страны за год",
+                    "Рыночная стоимость всех конечных товаров и услуг, произведенных в стране за год",
+                    "Объем золотовалютных резервов страны"
+                ],
+                correctIndex: 2,
+                explanation: "ВВП - это рыночная стоимость всех конечных товаров и услуг, произведенных на территории страны за определенный период времени (обычно за год).",
+                points: 50,
+                difficulty: "hard",
+                topic: "state"
+            },
+            {
+                id: 34,
+                question: "Что такое экономический рост?",
+                options: [
+                    "Увеличение численности населения",
+                    "Увеличение объема производства товаров и услуг в экономике",
+                    "Рост цен на товары и услуги",
+                    "Увеличение государственных расходов"
+                ],
+                correctIndex: 1,
+                explanation: "Экономический рост - это увеличение реального объема производства товаров и услуг в экономике за определенный период времени.",
+                points: 20,
+                difficulty: "medium",
+                topic: "state"
+            },
+            
+            // Мировая экономика (6 вопросов)
+            {
+                id: 35,
+                question: "Что такое международное разделение труда?",
+                options: [
+                    "Разделение мира на богатые и бедные страны",
+                    "Специализация стран на производстве определенных товаров",
+                    "Распределение трудовых ресурсов между странами",
+                    "Миграция рабочей силы между странами"
+                ],
+                correctIndex: 1,
+                explanation: "Международное разделение труда - это специализация стран на производстве определенных товаров и услуг для последующего обмена на мировом рынке.",
+                points: 20,
+                difficulty: "medium",
+                topic: "world"
+            },
+            {
+                id: 36,
+                question: "Что такое экспорт?",
+                options: [
+                    "Ввоз товаров в страну",
+                    "Вывоз товаров из страны",
+                    "Продажа товаров внутри страны",
+                    "Покупка товаров за границей"
+                ],
+                correctIndex: 1,
+                explanation: "Экспорт - это вывоз товаров и услуг за границу для реализации на внешних рынках.",
+                points: 10,
+                difficulty: "easy",
+                topic: "world"
+            },
+            {
+                id: 37,
+                question: "Что такое импорт?",
+                options: [
+                    "Ввоз товаров в страну",
+                    "Вывоз товаров из страны",
+                    "Продажа товаров внутри страны",
+                    "Производство товаров на экспорт"
+                ],
+                correctIndex: 0,
+                explanation: "Импорт - это ввоз товаров и услуг из-за границы для реализации на внутреннем рынке.",
+                points: 10,
+                difficulty: "easy",
+                topic: "world"
+            },
+            {
+                id: 38,
+                question: "Что такое валютный курс?",
+                options: [
+                    "Курс акций на бирже",
+                    "Цена денежной единицы одной страны, выраженная в денежных единицах другой страны",
+                    "Процент по валютным вкладам",
+                    "Скорость обращения денег"
+                ],
+                correctIndex: 1,
+                explanation: "Валютный курс - это цена денежной единицы одной страны, выраженная в денежных единицах другой страны или в международных валютных единицах.",
+                points: 20,
+                difficulty: "medium",
+                topic: "world"
+            },
+            {
+                id: 39,
+                question: "Что такое глобализация экономики?",
+                options: [
+                    "Объединение всех стран в одно государство",
+                    "Процесс усиления взаимосвязи и взаимозависимости экономик разных стран",
+                    "Унификация культур разных стран",
+                    "Создание мировой валюты"
+                ],
+                correctIndex: 1,
+                explanation: "Глобализация экономики - это процесс усиления взаимосвязи и взаимозависимости экономик различных стран мира, рост международной торговли и движения капиталов.",
+                points: 50,
+                difficulty: "hard",
+                topic: "world"
+            },
+            {
+                id: 40,
+                question: "Что такое ВТО?",
+                options: [
+                    "Всемирная туристическая организация",
+                    "Всемирная торговая организация",
+                    "Всемирная транспортная организация",
+                    "Всемирная трудовая организация"
+                ],
+                correctIndex: 1,
+                explanation: "ВТО (Всемирная торговая организация) - международная организация, созданная для либерализации международной торговли и регулирования торгово-политических отношений государств-членов.",
+                points: 20,
+                difficulty: "medium",
+                topic: "world"
+            },
+            
+            // Предпринимательство (5 вопросов)
+            {
+                id: 41,
+                question: "Кто такой предприниматель?",
+                options: [
+                    "Человек, работающий по найму",
+                    "Человек, создающий новое дело, принимающий на себя риск",
+                    "Человек, получающий зарплату",
+                    "Человек, работающий на государственной службе"
+                ],
+                correctIndex: 1,
+                explanation: "Предприниматель - это лицо, которое организует и ведет бизнес, принимая на себя финансовые риски ради получения прибыли.",
+                points: 10,
+                difficulty: "easy",
+                topic: "business"
+            },
+            {
+                id: 42,
+                question: "Что такое бизнес-план?",
+                options: [
+                    "План личных расходов предпринимателя",
+                    "Документ, описывающий цели бизнеса и пути их достижения",
+                    "Список сотрудников предприятия",
+                    "Финансовый отчет предприятия"
+                ],
+                correctIndex: 1,
+                explanation: "Бизнес-план - это документ, содержащий описание будущего бизнеса, анализ рынка, план производства, маркетинга, финансовый план и оценку рисков.",
+                points: 20,
+                difficulty: "medium",
+                topic: "business"
+            },
+            {
+                id: 43,
+                question: "Что такое прибыль?",
+                options: [
+                    "Сумма денег, вырученная от продажи товаров",
+                    "Разница между выручкой и затратами",
+                    "Затраты на производство товаров",
+                    "Зарплата предпринимателя"
+                ],
+                correctIndex: 1,
+                explanation: "Прибыль - это разница между выручкой от продажи товаров или услуг и затратами на их производство и реализацию.",
+                points: 10,
+                difficulty: "easy",
+                topic: "business"
+            },
+            {
+                id: 44,
+                question: "Что такое издержки производства?",
+                options: [
+                    "Доходы предприятия",
+                    "Расходы на производство и реализацию продукции",
+                    "Прибыль предприятия",
+                    "Налоги предприятия"
+                ],
+                correctIndex: 1,
+                explanation: "Издержки производства - это затраты, связанные с производством и реализацией товаров или услуг.",
+                points: 20,
+                difficulty: "medium",
+                topic: "business"
+            },
+            {
+                id: 45,
+                question: "Что такое диверсификация в бизнесе?",
+                options: [
+                    "Увеличение производства одного вида продукции",
+                    "Расширение ассортимента продукции и освоение новых видов производства",
+                    "Сокращение числа работников на предприятии",
+                    "Повышение цен на продукцию"
+                ],
+                correctIndex: 1,
+                explanation: "Диверсификация - это расширение ассортимента выпускаемой продукции и переориентация рынков сбыта, освоение новых видов производств.",
+                points: 20,
+                difficulty: "medium",
+                topic: "business"
+            },
+            
+            // Налоги (5 вопросов)
+            {
+                id: 46,
+                question: "Что такое налог?",
+                options: [
+                    "Добровольный взнос граждан",
+                    "Обязательный платеж в пользу государства",
+                    "Плата за государственные услуги",
+                    "Штраф за нарушение законов"
+                ],
+                correctIndex: 1,
+                explanation: "Налог - это обязательный, индивидуально безвозмездный платеж, взимаемый с организаций и физических лиц в форме отчуждения принадлежащих им денежных средств в целях финансового обеспечения деятельности государства.",
+                points: 10,
+                difficulty: "easy",
+                topic: "taxes"
+            },
+            {
+                id: 47,
+                question: "Что из перечисленного относится к прямым налогам?",
+                options: [
+                    "Налог на добавленную стоимость (НДС)",
+                    "Акцизы",
+                    "Налог на прибыль организаций",
+                    "Таможенные пошлины"
+                ],
+                correctIndex: 2,
+                explanation: "Прямые налоги взимаются непосредственно с доходов или имущества налогоплательщика. Налог на прибыль - прямой налог.",
+                points: 50,
+                difficulty: "hard",
+                topic: "taxes"
+            },
+            {
+                id: 48,
+                question: "Что такое НДС?",
+                options: [
+                    "Налог на доходы физических лиц",
+                    "Налог на добавленную стоимость",
+                    "Налог на дивиденды",
+                    "Налог на движимое имущество"
+                ],
+                correctIndex: 1,
+                explanation: "НДС (налог на добавленную стоимость) - косвенный налог, форма изъятия в бюджет части добавленной стоимости, которая создается на всех стадиях производства товаров, работ и услуг.",
+                points: 20,
+                difficulty: "medium",
+                topic: "taxes"
+            },
+            {
+                id: 49,
+                question: "Что такое налоговая декларация?",
+                options: [
+                    "Уведомление о начислении налога",
+                    "Документ, содержащий сведения о доходах и расходах налогоплательщика",
+                    "Квитанция об уплате налога",
+                    "Свидетельство о регистрации налогоплательщика"
+                ],
+                correctIndex: 1,
+                explanation: "Налоговая декларация - официальное заявление налогоплательщика о полученных доходах и произведенных расходах, источниках доходов, налоговых льготах и исчисленной сумме налога.",
+                points: 20,
+                difficulty: "medium",
+                topic: "taxes"
+            },
+            {
+                id: 50,
+                question: "Что такое прогрессивная система налогообложения?",
+                options: [
+                    "Система, при которой ставка налога увеличивается по мере роста дохода",
+                    "Система, при которой все платят одинаковый процент налога",
+                    "Система, при которой ставка налога уменьшается по мере роста дохода",
+                    "Система, при которой налог не взимается"
+                ],
+                correctIndex: 0,
+                explanation: "Прогрессивная система налогообложения - система, при которой ставка налога увеличивается по мере роста налогооблагаемой базы (дохода).",
+                points: 50,
+                difficulty: "hard",
+                topic: "taxes"
+            }
+        ];
+
+        // Элементы DOM
+        const questionGrid = document.getElementById('question-grid');
+        const questionText = document.getElementById('question-text');
+        const optionsContainer = document.getElementById('options-container');
+        const explanationElement = document.getElementById('explanation');
+        const submitBtn = document.getElementById('submit-btn');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+        const scoreElement = document.getElementById('score');
+        const questionPoints = document.getElementById('question-points');
+        const timerDisplay = document.getElementById('timer-display');
+        const startTimerBtn = document.getElementById('start-timer-btn');
+        const pauseTimerBtn = document.getElementById('pause-timer-btn');
+        const setTimerBtn = document.getElementById('set-timer-btn');
+        const teacherBtn = document.getElementById('teacher-mode-btn');
+        const adminPanel = document.getElementById('admin-panel');
+        const passwordModal = document.getElementById('password-modal');
+        const passwordInput = document.getElementById('password-input');
+        const passwordSubmit = document.getElementById('password-submit');
+        const passwordError = document.getElementById('password-error');
+        const addOptionBtn = document.getElementById('add-option-btn');
+        const addQuestionBtn = document.getElementById('add-question-btn');
+        const resetQuestionsBtn = document.getElementById('reset-questions-btn');
+        const topicItems = document.querySelectorAll('.topic-item');
+
+        // Переменные состояния
+        let currentQuestionId = null;
+        let selectedOption = null;
+        let score = 0;
+        let answeredQuestions = [];
+        let timerInterval = null;
+        let timerMinutes = 45;
+        let timerSeconds = 0;
+        let isTimerRunning = false;
+        let currentTopic = "all";
+        let teacherModeActive = false;
+        const teacherPassword = "teacher123";
+
+        // Инициализация приложения
+        function initApp() {
+            renderQuestionGrid();
+            updateScore();
+            initTimer();
+            initAdminPanel();
+            initEventListeners();
+            loadQuestionsFromStorage();
+        }
+
+        // Отрисовка сетки вопросов
+        function renderQuestionGrid() {
+            questionGrid.innerHTML = '';
+            
+            const filteredQuestions = currentTopic === "all" 
+                ? questions 
+                : questions.filter(q => q.topic === currentTopic);
+            
+            filteredQuestions.forEach(q => {
+                const card = document.createElement('div');
+                card.className = `question-card ${q.difficulty} ${answeredQuestions.includes(q.id) ? 'answered' : ''}`;
+                card.innerHTML = `
+                    ${q.id}
+                    <div class="points-badge">${q.points}</div>
+                `;
+                card.addEventListener('click', () => {
+                    if (!answeredQuestions.includes(q.id)) {
+                        showQuestion(q.id);
+                    }
+                });
+                questionGrid.appendChild(card);
+            });
+        }
+
+        // Показать выбранный вопрос
+        function showQuestion(id) {
+            const question = questions.find(q => q.id === id);
+            if (!question) return;
+            
+            currentQuestionId = id;
+            questionText.textContent = question.question;
+            questionPoints.textContent = `${question.points} баллов`;
+            
+            // Очистка и создание вариантов ответов
+            optionsContainer.innerHTML = '';
+            question.options.forEach((option, index) => {
+                const optionElement = document.createElement('div');
+                optionElement.className = 'option';
+                optionElement.textContent = option;
+                optionElement.addEventListener('click', () => {
+                    if (selectedOption !== null) return;
+                    
+                    // Снимаем выделение со всех вариантов
+                    document.querySelectorAll('.option').forEach(opt => {
+                        opt.classList.remove('selected');
+                    });
+                    
+                    // Выделяем выбранный вариант
+                    optionElement.classList.add('selected');
+                    selectedOption = index;
+                    submitBtn.disabled = false;
+                });
+                optionsContainer.appendChild(optionElement);
+            });
+            
+            // Скрыть пояснение и сбросить выбранный ответ
+            explanationElement.style.display = 'none';
+            selectedOption = null;
+            submitBtn.disabled = true;
+            prevBtn.disabled = false;
+            nextBtn.disabled = false;
+        }
+
+        // Проверка ответа
+        function checkAnswer() {
+            if (selectedOption === null) return;
+            
+            const question = questions.find(q => q.id === currentQuestionId);
+            const options = document.querySelectorAll('.option');
+            
+            // Пометить правильный и неправильный ответы
+            options.forEach((option, index) => {
+                if (index === question.correctIndex) {
+                    option.classList.add('correct');
+                } else if (index === selectedOption) {
+                    option.classList.add('incorrect');
+                }
+                option.style.cursor = 'default';
+            });
+            
+            // Показать пояснение
+            explanationElement.textContent = question.explanation;
+            explanationElement.style.display = 'block';
+            
+            // Обновить счет, если ответ правильный
+            if (selectedOption === question.correctIndex) {
+                score += question.points;
+                updateScore();
+            }
+            
+            // Добавить вопрос в список отвеченных
+            if (!answeredQuestions.includes(question.id)) {
+                answeredQuestions.push(question.id);
+                renderQuestionGrid();
+            }
+            
+            submitBtn.disabled = true;
+        }
+
+        // Обновление счета
+        function updateScore() {
+            scoreElement.textContent = score;
+        }
+
+        // Переход к следующему вопросу
+        function nextQuestion() {
+            const filteredQuestions = currentTopic === "all" 
+                ? questions 
+                : questions.filter(q => q.topic === currentTopic);
+            
+            const currentIndex = filteredQuestions.findIndex(q => q.id === currentQuestionId);
+            if (currentIndex < filteredQuestions.length - 1) {
+                const nextId = filteredQuestions[currentIndex + 1].id;
+                if (!answeredQuestions.includes(nextId)) {
+                    showQuestion(nextId);
+                }
+            }
+        }
+
+        // Переход к предыдущему вопросу
+        function prevQuestion() {
+            const filteredQuestions = currentTopic === "all" 
+                ? questions 
+                : questions.filter(q => q.topic === currentTopic);
+            
+            const currentIndex = filteredQuestions.findIndex(q => q.id === currentQuestionId);
+            if (currentIndex > 0) {
+                const prevId = filteredQuestions[currentIndex - 1].id;
+                if (!answeredQuestions.includes(prevId)) {
+                    showQuestion(prevId);
+                }
+            }
+        }
+
+        // Таймер
+        function initTimer() {
+            updateTimerDisplay();
+            
+            startTimerBtn.addEventListener('click', startTimer);
+            pauseTimerBtn.addEventListener('click', pauseTimer);
+            setTimerBtn.addEventListener('click', setTimer);
+        }
+
+        function startTimer() {
+            if (isTimerRunning) return;
+            isTimerRunning = true;
+            
+            timerInterval = setInterval(() => {
+                if (timerSeconds === 0) {
+                    if (timerMinutes === 0) {
+                        clearInterval(timerInterval);
+                        alert("Время вышло!");
+                        return;
+                    }
+                    timerMinutes--;
+                    timerSeconds = 59;
+                } else {
+                    timerSeconds--;
+                }
+                
+                updateTimerDisplay();
+            }, 1000);
+        }
+
+        function pauseTimer() {
+            clearInterval(timerInterval);
+            isTimerRunning = false;
+        }
+
+        function setTimer() {
+            const input = prompt("Установите время в минутах:", timerMinutes);
+            if (input !== null && !isNaN(input) && input > 0) {
+                timerMinutes = parseInt(input);
+                timerSeconds = 0;
+                updateTimerDisplay();
+            }
+        }
+
+        function updateTimerDisplay() {
+            const mins = timerMinutes.toString().padStart(2, '0');
+            const secs = timerSeconds.toString().padStart(2, '0');
+            timerDisplay.textContent = `${mins}:${secs}`;
+        }
+
+        // Панель администратора (учителя)
+        function initAdminPanel() {
+            // Обработчик добавления варианта ответа
+            addOptionBtn.addEventListener('click', () => {
+                const optionInputs = document.getElementById('option-inputs');
+                const newIndex = optionInputs.children.length;
+                
+                const optionInput = document.createElement('div');
+                optionInput.className = 'option-input';
+                optionInput.innerHTML = `
+                    <input type="text" placeholder="Вариант ${newIndex + 1}">
+                    <div class="correct-option" data-index="${newIndex}"><i class="fas fa-check"></i></div>
+                `;
+                
+                optionInput.querySelector('.correct-option').addEventListener('click', toggleCorrectOption);
+                optionInputs.appendChild(optionInput);
+            });
+            
+            // Обработчики выбора правильного ответа
+            document.querySelectorAll('.correct-option').forEach(el => {
+                el.addEventListener('click', toggleCorrectOption);
+            });
+            
+            // Обработчик добавления вопроса
+            addQuestionBtn.addEventListener('click', addQuestion);
+            
+            // Обработчик сброса вопросов
+            resetQuestionsBtn.addEventListener('click', resetQuestions);
+        }
+
+        function toggleCorrectOption(e) {
+            const correctOption = e.currentTarget;
+            const optionInputs = document.getElementById('option-inputs');
+            
+            // Сбрасываем все отметки
+            optionInputs.querySelectorAll('.correct-option').forEach(el => {
+                el.classList.remove('active');
+            });
+            
+            // Устанавливаем новую отметку
+            correctOption.classList.add('active');
+        }
+
+        function addQuestion() {
+            const questionInput = document.getElementById('question-input').value.trim();
+            const explanationInput = document.getElementById('explanation-input').value.trim();
+            const difficultySelect = document.getElementById('difficulty-select');
+            const topicSelect = document.getElementById('topic-select');
+            const points = parseInt(difficultySelect.value);
+            const topic = topicSelect.value;
+            const difficulty = 
+                points === 10 ? 'easy' : 
+                points === 20 ? 'medium' : 'hard';
+            
+            // Собираем варианты ответов
+            const options = [];
+            document.querySelectorAll('#option-inputs .option-input input').forEach(input => {
+                if (input.value.trim() !== '') {
+                    options.push(input.value.trim());
+                }
+            });
+            
+            // Проверяем правильный ответ
+            let correctIndex = 0;
+            document.querySelectorAll('#option-inputs .correct-option').forEach((el, index) => {
+                if (el.classList.contains('active')) {
+                    correctIndex = index;
+                }
+            });
+            
+            // Валидация
+            if (questionInput === '') {
+                alert('Введите текст вопроса');
+                return;
+            }
+            
+            if (options.length < 2) {
+                alert('Добавьте хотя бы два варианта ответа');
+                return;
+            }
+            
+            // Создаем новый вопрос
+            const newQuestion = {
+                id: questions.length + 1,
+                question: questionInput,
+                options: options,
+                correctIndex: correctIndex,
+                explanation: explanationInput || 'Пояснение отсутствует',
+                points: points,
+                difficulty: difficulty,
+                topic: topic
+            };
+            
+            // Добавляем вопрос
+            questions.push(newQuestion);
+            saveQuestionsToStorage();
+            renderQuestionGrid();
+            
+            // Сбрасываем форму
+            document.getElementById('question-input').value = '';
+            document.getElementById('explanation-input').value = '';
+            document.querySelectorAll('#option-inputs .option-input input').forEach(input => {
+                input.value = '';
+            });
+            
+            alert('Вопрос успешно добавлен!');
+        }
+
+        function resetQuestions() {
+            if (confirm('Вы уверены, что хотите сбросить все вопросы к исходному состоянию?')) {
+                // Восстановление исходных вопросов
+                questions = [
+                    // Здесь должна быть полная копия исходного массива вопросов
+                    // Для краткости в этом примере не приводится
+                ];
+                saveQuestionsToStorage();
+                answeredQuestions = [];
+                score = 0;
+                updateScore();
+                renderQuestionGrid();
+                questionText.textContent = "Выберите вопрос из сетки выше.";
+                optionsContainer.innerHTML = '';
+                explanationElement.style.display = 'none';
+                submitBtn.disabled = true;
+                alert('Вопросы восстановлены к исходному состоянию!');
+            }
+        }
+
+        // Сохранение и загрузка вопросов
+        function saveQuestionsToStorage() {
+            localStorage.setItem('economics-questions', JSON.stringify(questions));
+        }
+
+        function loadQuestionsFromStorage() {
+            const savedQuestions = localStorage.getItem('economics-questions');
+            if (savedQuestions) {
+                questions = JSON.parse(savedQuestions);
+                renderQuestionGrid();
+            }
+        }
+
+        // Обработчики событий
+        function initEventListeners() {
+            submitBtn.addEventListener('click', checkAnswer);
+            nextBtn.addEventListener('click', nextQuestion);
+            prevBtn.addEventListener('click', prevQuestion);
+            
+            // Переключение тем
+            topicItems.forEach(item => {
+                item.addEventListener('click', () => {
+                    document.querySelector('.topic-item.active').classList.remove('active');
+                    item.classList.add('active');
+                    currentTopic = item.dataset.topic;
+                    renderQuestionGrid();
+                });
+            });
+            
+            // Режим учителя
+            teacherBtn.addEventListener('click', () => {
+                passwordModal.style.display = 'flex';
+            });
+            
+            passwordSubmit.addEventListener('click', () => {
+                if (passwordInput.value === teacherPassword) {
+                    passwordModal.style.display = 'none';
+                    adminPanel.style.display = 'block';
+                    teacherModeActive = true;
+                    passwordError.style.display = 'none';
+                } else {
+                    passwordError.style.display = 'block';
+                }
+                passwordInput.value = '';
+            });
+        }
+
+        // Запуск приложения
+        window.onload = initApp;
+    </script>
+</body>
+</html>
